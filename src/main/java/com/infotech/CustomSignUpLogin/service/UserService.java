@@ -16,9 +16,10 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
-    JwtTokenProvider jwtTokenProvider = new JwtTokenProvider();
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     public User registerUser(User user) {
 
