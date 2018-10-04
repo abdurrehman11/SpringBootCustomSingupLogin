@@ -1,12 +1,13 @@
-package com.infotech.CustomSignUpLogin.exception.signup;
+package com.infotech.CustomSignUpLogin.exception;
 
-
+import com.infotech.CustomSignUpLogin.exception.signup.SignUpException;
+import com.infotech.CustomSignUpLogin.exception.signup.SignUpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
-public class SignUpExceptionController {
+public class RESTExceptionController {
 
     @ExceptionHandler(value = SignUpException.class)
     @ResponseBody
