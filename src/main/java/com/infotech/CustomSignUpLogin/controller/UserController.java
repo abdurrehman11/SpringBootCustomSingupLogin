@@ -1,5 +1,6 @@
 package com.infotech.CustomSignUpLogin.controller;
 
+import com.infotech.CustomSignUpLogin.exception.signup.SignUpResponse;
 import com.infotech.CustomSignUpLogin.model.User;
 import com.infotech.CustomSignUpLogin.pojo.LoginRequest;
 import com.infotech.CustomSignUpLogin.pojo.LoginResponse;
@@ -17,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/signup")
-    public User registerUser(@Valid @RequestBody User user) {
+    public SignUpResponse registerUser(@Valid @RequestBody User user) {
 
         return userService.registerUser(user);
     }
