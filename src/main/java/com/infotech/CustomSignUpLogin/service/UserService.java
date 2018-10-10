@@ -40,6 +40,9 @@ public class UserService {
 //        if (userRepository.findByUsername(user.getUsername()) != null)
 //            throw new SignUpException(SignUpEnum.USERNAME_ALREADY_EXISTS.getKey(), SignUpEnum.SUCCESS_FALSE.getKey());
 
+        User user1 = userRepository.findByUsername(user.getUsername());
+        System.out.println(user1.getEmail());
+
         User encryptedUser = new User(user.getUsername(), user.getEmail(), user.getPassword());
         encryptedUser.setPassword(passwordEncoder.encode(encryptedUser.getPassword()));
         userRepository.save(encryptedUser);
