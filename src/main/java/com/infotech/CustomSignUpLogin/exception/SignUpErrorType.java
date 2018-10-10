@@ -9,20 +9,13 @@ public enum SignUpErrorType implements ApiErrorType {
     SUCCESSFUL_REGISTRATION("User registered successfully", 1005);
 
     private String message;
-    private Integer code;
 
     SignUpErrorType(String message, Integer code) {
         this.message = message;
-        this.code = code;
     }
 
     @Override
     public String getMessage() {
         return message;
-    }
-
-    @Override
-    public Integer getCode() {
-        return code;
     }
 }

@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public Response<User> registerUser(@Valid @RequestBody User user) {
+    public User registerUser(@Valid @RequestBody User user) {
 
         return userService.registerUser(user);
     }
@@ -44,18 +44,18 @@ public class UserController {
 
         return userService.verifyToken(token);
     }
-
-    @GetMapping("/exceptions")
-    public String getAllExceptions() {
-        List<Exceptions> exceptions = exceptionService.getAllExceptions();
-        System.out.println(exceptions);
-        return "Get exceptions";
-    }
-
-    @GetMapping("/exception")
-    public String getExceptionById() {
-        Exceptions exception = exceptionService.getExceptionById(2L);
-        System.out.println(exception);
-        return "Get exception";
-    }
+//
+//    @GetMapping("/exceptions")
+//    public String getAllExceptions() {
+//        List<Exceptions> exceptions = exceptionService.getAllExceptions();
+//        System.out.println(exceptions);
+//        return "Get exceptions";
+//    }
+//
+//    @GetMapping("/exception")
+//    public String getExceptionById() {
+//        Exceptions exception = exceptionService.getExceptionById(2L);
+//        System.out.println(exception);
+//        return "Get exception";
+//    }
 }

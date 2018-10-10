@@ -1,8 +1,8 @@
 package com.infotech.CustomSignUpLogin.service;
 
-import com.infotech.CustomSignUpLogin.exception.ResourceNotFoundException;
 import com.infotech.CustomSignUpLogin.exception.Response;
 import com.infotech.CustomSignUpLogin.exception.SignUpErrorType;
+import com.infotech.CustomSignUpLogin.exception.ValidationException;
 import com.infotech.CustomSignUpLogin.model.User;
 import com.infotech.CustomSignUpLogin.pojo.LoginRequest;
 import com.infotech.CustomSignUpLogin.pojo.LoginResponse;
@@ -25,10 +25,10 @@ public class UserService {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    public Response<User> registerUser(User user) {
+    public User registerUser(User user) {
 
         if (user.getUsername().length() < 3)
-            throw new ResourceNotFoundException(SignUpErrorType.INVALID_USERNAME_LENGTH);
+            throw new ValidationException(SignUpErrorType.INVALID_USERNAME_LENGTH);
 
 
 //        if (!EmailValidator.getInstance().isValid(user.getEmail()))
@@ -44,12 +44,12 @@ public class UserService {
         encryptedUser.setPassword(passwordEncoder.encode(encryptedUser.getPassword()));
         userRepository.save(encryptedUser);
 
-        Response<User> userResponse = new Response<>();
-        userResponse.setStatus_code(HttpStatus.OK.value());
-        userResponse.setMessage(SignUpErrorType.SUCCESSFUL_REGISTRATION.getMessage());
-        userResponse.setBody(encryptedUser);
+//        Response<User> userResponse = new Response<>();
+//        userResponse.setStatus_code(HttpStatus.OK.value());
+//        userResponse.setMessage(SignUpErrorType.SUCCESSFUL_REGISTRATION.getMessage());
+//        userResponse.setBody(encryptedUser);
 
-        return userResponse;
+        return encryptedUser;
     }
 
     public LoginResponse loginUser(LoginRequest loginRequest) {

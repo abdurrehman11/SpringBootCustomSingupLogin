@@ -1,6 +1,7 @@
 package com.infotech.CustomSignUpLogin;
 
 import com.infotech.CustomSignUpLogin.config.CachedData;
+import com.infotech.CustomSignUpLogin.model.Exceptions;
 import com.infotech.CustomSignUpLogin.service.ExceptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -11,9 +12,10 @@ import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @SpringBootApplication
-@EnableCaching
+//@EnableCaching
 public class CustomSignUpLoginApplication {
 
 	@Autowired
@@ -23,14 +25,16 @@ public class CustomSignUpLoginApplication {
 		SpringApplication.run(CustomSignUpLoginApplication.class, args);
 	}
 
-	@Bean
-	public CacheManager cacheManager() {
-		return new ConcurrentMapCacheManager("exceptionCache");
-	}
-
-	@PostConstruct
-	public void fetchExceptionsInCache() {
-		CachedData.exceptions =  exceptionService.getAllExceptions();
-	}
+//	@Bean
+//	public CacheManager cacheManager() {
+//		return new ConcurrentMapCacheManager("exceptionCache");
+//	}
+//
+//	@PostConstruct
+//	public void fetchExceptionsInCache() {
+//
+//		List<Exceptions> exceptionsList = exceptionService.getAllExceptions();
+//		System.out.println(exceptionsList);
+//	}
 
 }
