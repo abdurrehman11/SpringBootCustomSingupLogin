@@ -1,15 +1,15 @@
 package com.infotech.CustomSignUpLogin.service;
 
-import com.infotech.CustomSignUpLogin.exception.signup.SignUpEnum;
-import com.infotech.CustomSignUpLogin.exception.signup.SignUpException;
-import com.infotech.CustomSignUpLogin.exception.signup.SignUpResponse;
+import com.infotech.CustomSignUpLogin.exception.ResourceNotFoundException;
+import com.infotech.CustomSignUpLogin.exception.Response;
+import com.infotech.CustomSignUpLogin.exception.SignUpErrorType;
 import com.infotech.CustomSignUpLogin.model.User;
 import com.infotech.CustomSignUpLogin.pojo.LoginRequest;
 import com.infotech.CustomSignUpLogin.pojo.LoginResponse;
 import com.infotech.CustomSignUpLogin.repository.UserRepository;
 import com.infotech.CustomSignUpLogin.security.JwtTokenProvider;
-import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,24 +25,31 @@ public class UserService {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    public SignUpResponse registerUser(User user) {
+    public Response<User> registerUser(User user) {
 
         if (user.getUsername().length() < 3)
-            throw new SignUpException(SignUpEnum.INVALID_USERNAME_LENGTH.getKey(), SignUpEnum.SUCCESS_FALSE.getKey());
+            throw new ResourceNotFoundException(SignUpErrorType.INVALID_USERNAME_LENGTH);
 
-        if (!EmailValidator.getInstance().isValid(user.getEmail()))
-            throw new SignUpException(SignUpEnum.INVALID_EMAIL_FORMAT.getKey(), SignUpEnum.SUCCESS_FALSE.getKey());
 
-        if (user.getPassword().length() < 8)
-            throw new SignUpException(SignUpEnum.INVALID_PASSWORD_LENGTH.getKey(), SignUpEnum.SUCCESS_FALSE.getKey());
-
-        if (userRepository.findByUsername(user.getUsername()) != null)
-            throw new SignUpException(SignUpEnum.USERNAME_ALREADY_EXISTS.getKey(), SignUpEnum.SUCCESS_FALSE.getKey());
+//        if (!EmailValidator.getInstance().isValid(user.getEmail()))
+//            throw new SignUpException(SignUpEnum.INVALID_EMAIL_FORMAT.getKey(), SignUpEnum.SUCCESS_FALSE.getKey());
+//
+//        if (user.getPassword().length() < 8)
+//            throw new SignUpException(SignUpEnum.INVALID_PASSWORD_LENGTH.getKey(), SignUpEnum.SUCCESS_FALSE.getKey());
+//
+//        if (userRepository.findByUsername(user.getUsername()) != null)
+//            throw new SignUpException(SignUpEnum.USERNAME_ALREADY_EXISTS.getKey(), SignUpEnum.SUCCESS_FALSE.getKey());
 
         User encryptedUser = new User(user.getUsername(), user.getEmail(), user.getPassword());
         encryptedUser.setPassword(passwordEncoder.encode(encryptedUser.getPassword()));
         userRepository.save(encryptedUser);
-        return new SignUpResponse(SignUpEnum.SUCCESSFUL_REGISTRATION.getKey(), SignUpEnum.SUCCESS_TRUE.getKey());
+
+        Response<User> userResponse = new Response<>();
+        userResponse.setStatus_code(HttpStatus.OK.value());
+        userResponse.setMessage(SignUpErrorType.SUCCESSFUL_REGISTRATION.getMessage());
+        userResponse.setBody(encryptedUser);
+
+        return userResponse;
     }
 
     public LoginResponse loginUser(LoginRequest loginRequest) {
