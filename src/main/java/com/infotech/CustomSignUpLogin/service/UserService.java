@@ -28,7 +28,13 @@ public class UserService {
     public User registerUser(User user) {
 
         if (user.getUsername().length() < 3)
-            throw new ValidationException(SignUpErrorType.INVALID_USERNAME_LENGTH);
+        {
+            String id = "2";
+            // pass any number of String arguments to setMessage()
+            SignUpErrorType.USERNAME_ALREADY_EXISTS.setMessage("Username already exists with id: ", id);
+            throw new ValidationException(SignUpErrorType.USERNAME_ALREADY_EXISTS);
+        }
+//            throw new ValidationException(SignUpErrorType.INVALID_USERNAME_LENGTH);
 
 
 //        if (!EmailValidator.getInstance().isValid(user.getEmail()))
@@ -36,9 +42,12 @@ public class UserService {
 //
 //        if (user.getPassword().length() < 8)
 //            throw new SignUpException(SignUpEnum.INVALID_PASSWORD_LENGTH.getKey(), SignUpEnum.SUCCESS_FALSE.getKey());
-//
-        if (userRepository.findByUsername(user.getUsername()) != null)
-            throw new ValidationException(SignUpErrorType.USERNAME_ALREADY_EXISTS);
+
+//        User user2 = userRepository.findByUsername(user.getUsername());
+////
+//        if (userRepository.findByUsername(user.getUsername()) != null) {
+//        }
+
 
         User user1 = userRepository.findByUsername(user.getUsername());
         System.out.println(user1.getEmail());
