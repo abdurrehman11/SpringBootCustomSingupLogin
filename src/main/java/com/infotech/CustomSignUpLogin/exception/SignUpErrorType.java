@@ -1,12 +1,13 @@
 package com.infotech.CustomSignUpLogin.exception;
 
-public enum SignUpErrorType implements ApiErrorType {
+public enum SignUpErrorType implements ApiErrorType<SignUpErrorType> {
 
     INVALID_USERNAME_LENGTH(1001, "Username must consists of 3 characters"),
     INVALID_EMAIL_FORMAT(1002, "Email format is not valid"),
     INVALID_PASSWORD_LENGTH(1003, "Password must consists of 8 characters"),
     SUCCESSFUL_REGISTRATION(1005, "User registered successfully"),
 
+    // can append custom message from service
     USERNAME_ALREADY_EXISTS(1004);
 
     private String message = "";
