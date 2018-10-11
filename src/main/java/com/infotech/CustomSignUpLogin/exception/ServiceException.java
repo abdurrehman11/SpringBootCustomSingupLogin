@@ -1,16 +1,8 @@
 package com.infotech.CustomSignUpLogin.exception;
 
-public class ServiceException extends RuntimeException {
+public class ServiceException extends BaseException {
 
-    private static final long serialVersionUID = 1L;
-
-    private ApiErrorType apiErrorType;
-
-    public ServiceException (ApiErrorType apiErrorType) {
-        this.apiErrorType = apiErrorType;
-    }
-
-    public ApiErrorType getApiErrorType() {
-        return apiErrorType;
+    public ServiceException(ApiErrorType apiErrorType) {
+        super(apiErrorType);
     }
 }

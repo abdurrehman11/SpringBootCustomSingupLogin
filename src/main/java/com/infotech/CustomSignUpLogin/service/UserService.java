@@ -37,8 +37,8 @@ public class UserService {
 //        if (user.getPassword().length() < 8)
 //            throw new SignUpException(SignUpEnum.INVALID_PASSWORD_LENGTH.getKey(), SignUpEnum.SUCCESS_FALSE.getKey());
 //
-//        if (userRepository.findByUsername(user.getUsername()) != null)
-//            throw new SignUpException(SignUpEnum.USERNAME_ALREADY_EXISTS.getKey(), SignUpEnum.SUCCESS_FALSE.getKey());
+        if (userRepository.findByUsername(user.getUsername()) != null)
+            throw new ValidationException(SignUpErrorType.USERNAME_ALREADY_EXISTS);
 
         User user1 = userRepository.findByUsername(user.getUsername());
         System.out.println(user1.getEmail());
