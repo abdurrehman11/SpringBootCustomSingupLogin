@@ -1,6 +1,5 @@
 package com.infotech.CustomSignUpLogin.service;
 
-import com.infotech.CustomSignUpLogin.exception.Response;
 import com.infotech.CustomSignUpLogin.exception.SignUpErrorType;
 import com.infotech.CustomSignUpLogin.exception.ValidationException;
 import com.infotech.CustomSignUpLogin.model.User;

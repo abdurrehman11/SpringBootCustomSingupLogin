@@ -10,23 +10,22 @@ public enum SignUpErrorType implements ApiErrorType<SignUpErrorType> {
     USERNAME_ALREADY_EXISTS(1004, "Username already exists"),
     SUCCESSFUL_REGISTRATION(1005, "User registered successfully");
 
-    private Integer error_code;
-    private String error_message = "";
+    private Integer errorCode;
+    private String errorMessage = "";
 
-    SignUpErrorType(Integer error_code, String error_message) {
-        this.error_code = error_code;
-        this.error_message = error_message;
+    SignUpErrorType(Integer errorCode, String errorMessage) {
+        this.errorCode = errorCode;
+        this.errorMessage = errorMessage;
     }
+
 
     @Override
-    public String getMessage() {
-        return error_message;
+    public String getErrorMessage() {
+        return errorMessage;
     }
-
 
     @Override
     public Integer getErrorCode() {
-        return error_code;
+        return errorCode;
     }
-
 }

@@ -14,28 +14,28 @@ public abstract class BaseException extends RuntimeException {
     protected BaseException (Exception ex) {
         super(ex);
         this.httpStatus = HttpStatus.BAD_REQUEST;
-        this.errorMessage = GeneralException.ERROR_DESCRIPTION.getErrorMessage();
-        this.errorCode = GeneralException.ERROR_DESCRIPTION.getErrorCode();
+        this.errorMessage = GeneralErrorType.ERROR_DESCRIPTION.getErrorMessage();
+        this.errorCode = GeneralErrorType.ERROR_DESCRIPTION.getErrorCode();
     }
 
     protected BaseException (Exception ex, String errorMessage) {
         super(ex);
         this.httpStatus = HttpStatus.BAD_REQUEST;
         this.errorMessage = errorMessage;
-        this.errorCode = GeneralException.ERROR_DESCRIPTION.getErrorCode();
+        this.errorCode = GeneralErrorType.ERROR_DESCRIPTION.getErrorCode();
     }
 
     protected BaseException (Exception ex, HttpStatus httpStatus) {
         super(ex);
         this.httpStatus = httpStatus;
-        this.errorMessage = GeneralException.ERROR_DESCRIPTION.getErrorMessage();
-        this.errorCode = GeneralException.ERROR_DESCRIPTION.getErrorCode();
+        this.errorMessage = GeneralErrorType.ERROR_DESCRIPTION.getErrorMessage();
+        this.errorCode = GeneralErrorType.ERROR_DESCRIPTION.getErrorCode();
     }
 
     protected BaseException (Exception ex, Integer errorCode) {
         super(ex);
         this.httpStatus = HttpStatus.BAD_REQUEST;
-        this.errorMessage = GeneralException.ERROR_DESCRIPTION.getErrorMessage();
+        this.errorMessage = GeneralErrorType.ERROR_DESCRIPTION.getErrorMessage();
         this.errorCode = errorCode;
     }
 
@@ -50,7 +50,7 @@ public abstract class BaseException extends RuntimeException {
         super(ex);
         this.httpStatus = httpStatus;
         this.errorMessage = errorMessage;
-        this.errorCode = GeneralException.ERROR_DESCRIPTION.getErrorCode();
+        this.errorCode = GeneralErrorType.ERROR_DESCRIPTION.getErrorCode();
     }
 
     protected BaseException (Exception ex, HttpStatus httpStatus, String errorMessage,Integer errorCode) {
@@ -61,14 +61,14 @@ public abstract class BaseException extends RuntimeException {
     }
 
     protected BaseException (ApiErrorType<? extends Enum<?>> apiErrorType, HttpStatus httpStatus) {
-        super(apiErrorType.getMessage());
+        super(apiErrorType.getErrorMessage());
         this.httpStatus = httpStatus;
-        this.errorMessage = apiErrorType.getMessage();
+        this.errorMessage = apiErrorType.getErrorMessage();
         this.errorCode = apiErrorType.getErrorCode();
     }
 
     protected BaseException (ApiErrorType<? extends Enum<?>> apiErrorType, String errorMessage) {
-        super(apiErrorType.getMessage());
+        super(apiErrorType.getErrorMessage());
         this.httpStatus = HttpStatus.BAD_REQUEST;
         this.errorMessage = errorMessage;
         this.errorCode = apiErrorType.getErrorCode();

@@ -11,22 +11,23 @@ public class ExceptionController {
 
     @ResponseBody
     @ExceptionHandler(value = BaseException.class)
-    public Response handleValidationException (BaseException ex, HttpServletRequest req, HttpServletResponse res) {
+    public ErrorResponse handleValidationException (BaseException ex, HttpServletRequest req, HttpServletResponse res) {
 
-       Response response = new Response(ex.getHttpStatus().value(), ex.getErrorMessage(),
+        ErrorResponse errorResponse = new ErrorResponse(ex.getHttpStatus().value(), ex.getErrorMessage(),
                ex.getErrorCode());
        res.setStatus(ex.getHttpStatus().value());
-       return response;
+       return errorResponse;
     }
 
 
     @ResponseBody
     @ExceptionHandler(value = RuntimeException.class)
-    public Response handleGeneralException() {
+    public ErrorResponse handleGeneralException(HttpServletRequest req, HttpServletResponse res) {
 
-        Response response = new Response(HttpStatus.INTERNAL_SERVER_ERROR.value(), GeneralException.ERROR_DESCRIPTION.getErrorMessage(),
-                GeneralException.ERROR_DESCRIPTION.getErrorCode());
-        return response;
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), GeneralErrorType.ERROR_DESCRIPTION.getErrorMessage(),
+                GeneralErrorType.ERROR_DESCRIPTION.getErrorCode());
+        res.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return errorResponse;
     }
 
 }
