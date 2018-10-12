@@ -11,16 +11,16 @@ public enum SignUpErrorType implements ApiErrorType<SignUpErrorType> {
     SUCCESSFUL_REGISTRATION(1005, "User registered successfully");
 
     private Integer error_code;
-    private String message = "";
+    private String error_message = "";
 
-    SignUpErrorType(Integer error_code, String message) {
+    SignUpErrorType(Integer error_code, String error_message) {
         this.error_code = error_code;
-        this.message = message;
+        this.error_message = error_message;
     }
 
     @Override
     public String getMessage() {
-        return message;
+        return error_message;
     }
 
 

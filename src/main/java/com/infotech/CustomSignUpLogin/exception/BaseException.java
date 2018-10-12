@@ -11,16 +11,53 @@ public abstract class BaseException extends RuntimeException {
     protected Integer errorCode;
 
 
+    protected BaseException (Exception ex) {
+        super(ex);
+        this.httpStatus = HttpStatus.BAD_REQUEST;
+        this.errorMessage = GeneralException.ERROR_DESCRIPTION.getErrorMessage();
+        this.errorCode = GeneralException.ERROR_DESCRIPTION.getErrorCode();
+    }
+
+    protected BaseException (Exception ex, String errorMessage) {
+        super(ex);
+        this.httpStatus = HttpStatus.BAD_REQUEST;
+        this.errorMessage = errorMessage;
+        this.errorCode = GeneralException.ERROR_DESCRIPTION.getErrorCode();
+    }
+
     protected BaseException (Exception ex, HttpStatus httpStatus) {
         super(ex);
         this.httpStatus = httpStatus;
-        if (ex.getMessage() != null) {
-            this.errorMessage = ex.getMessage();
-            this.errorCode = null;
-        } else {
-            this.errorMessage = GeneralException.SOMETHING_WENT_WRONG.getErrorMessage();
-            this.errorCode = GeneralException.SOMETHING_WENT_WRONG.getErrorCode();
-        }
+        this.errorMessage = GeneralException.ERROR_DESCRIPTION.getErrorMessage();
+        this.errorCode = GeneralException.ERROR_DESCRIPTION.getErrorCode();
+    }
+
+    protected BaseException (Exception ex, Integer errorCode) {
+        super(ex);
+        this.httpStatus = HttpStatus.BAD_REQUEST;
+        this.errorMessage = GeneralException.ERROR_DESCRIPTION.getErrorMessage();
+        this.errorCode = errorCode;
+    }
+
+    protected BaseException (Exception ex, String errorMessage, Integer errorCode) {
+        super(ex);
+        this.httpStatus = HttpStatus.BAD_REQUEST;
+        this.errorMessage = errorMessage;
+        this.errorCode = errorCode;
+    }
+
+    protected BaseException (Exception ex, HttpStatus httpStatus, String errorMessage) {
+        super(ex);
+        this.httpStatus = httpStatus;
+        this.errorMessage = errorMessage;
+        this.errorCode = GeneralException.ERROR_DESCRIPTION.getErrorCode();
+    }
+
+    protected BaseException (Exception ex, HttpStatus httpStatus, String errorMessage,Integer errorCode) {
+        super(ex);
+        this.httpStatus = httpStatus;
+        this.errorMessage = errorMessage;
+        this.errorCode = errorCode;
     }
 
     protected BaseException (ApiErrorType<? extends Enum<?>> apiErrorType, HttpStatus httpStatus) {

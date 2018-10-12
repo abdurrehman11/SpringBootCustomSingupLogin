@@ -2,14 +2,14 @@ package com.infotech.CustomSignUpLogin.exception;
 
 public enum GeneralException {
 
-    SOMETHING_WENT_WRONG(9999, "Something went wrong.");
+    ERROR_DESCRIPTION(9999, "Something went wrong.");
 
     private Integer code;
-    private String message;
+    private String error_message;
 
-    GeneralException(Integer code, String message) {
+    GeneralException(Integer code, String error_message) {
         this.code = code;
-        this.message = message;
+        this.error_message = error_message;
     }
 
     public Integer getErrorCode() {
@@ -17,6 +17,6 @@ public enum GeneralException {
     }
 
     public String getErrorMessage() {
-        return message;
+        return error_message;
     }
 }
