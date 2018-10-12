@@ -8,6 +8,10 @@ public class ValidationException extends BaseException {
         super(ex, httpStatus);
     }
 
+    public ValidationException(ApiErrorType<? extends Enum<?>> apiErrorType, String message) {
+        super(apiErrorType, message);
+    }
+
     public ValidationException(ApiErrorType<? extends Enum<?>> apiErrorType, HttpStatus httpStatus) {
         super(apiErrorType, httpStatus);
     }

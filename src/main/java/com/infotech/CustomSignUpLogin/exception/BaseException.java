@@ -67,6 +67,13 @@ public abstract class BaseException extends RuntimeException {
         this.errorCode = apiErrorType.getErrorCode();
     }
 
+    protected BaseException (ApiErrorType<? extends Enum<?>> apiErrorType, String errorMessage) {
+        super(apiErrorType.getMessage());
+        this.httpStatus = HttpStatus.BAD_REQUEST;
+        this.errorMessage = errorMessage;
+        this.errorCode = apiErrorType.getErrorCode();
+    }
+
     protected BaseException (ApiErrorType<? extends Enum<?>> apiErrorType, String message, HttpStatus httpStatus) {
         super(message);
         this.httpStatus = httpStatus;

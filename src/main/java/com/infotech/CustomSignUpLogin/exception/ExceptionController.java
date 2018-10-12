@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 public class ExceptionController {
 
     @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = BaseException.class)
     public Response handleValidationException (BaseException ex) {
 
@@ -18,12 +17,11 @@ public class ExceptionController {
 
 
     @ResponseBody
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = RuntimeException.class)
     public Response handleGeneralException() {
 
-        Response response = new Response(HttpStatus.INTERNAL_SERVER_ERROR.value(), GeneralException.SOMETHING_WENT_WRONG.getErrorMessage(),
-                GeneralException.SOMETHING_WENT_WRONG.getErrorCode());
+        Response response = new Response(HttpStatus.INTERNAL_SERVER_ERROR.value(), GeneralException.ERROR_DESCRIPTION.getErrorMessage(),
+                GeneralException.ERROR_DESCRIPTION.getErrorCode());
         return response;
     }
 
