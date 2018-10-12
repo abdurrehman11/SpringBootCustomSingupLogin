@@ -11,7 +11,8 @@ public class ExceptionController {
     @ExceptionHandler(value = BaseException.class)
     public Response handleValidationException (BaseException ex) {
 
-       Response response = new Response(HttpStatus.BAD_REQUEST.value(), ex.getApiErrorType().getMessage(), ex.getApiErrorType().getErrorCode());
+       Response response = new Response(ex.getHttpStatus().value(), ex.getErrorMessage(),
+               ex.getErrorCode());
        return response;
     }
 

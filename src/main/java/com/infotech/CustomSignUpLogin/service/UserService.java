@@ -30,9 +30,9 @@ public class UserService {
         if (user.getUsername().length() < 3)
         {
             String id = "2";
-            // pass any number of String arguments to setMessage()
-            SignUpErrorType.USERNAME_ALREADY_EXISTS.setMessage("Username already exists with id: ", id);
-            throw new ValidationException(SignUpErrorType.USERNAME_ALREADY_EXISTS);
+            String myMessage = "Username already exists with id: " + id;
+            // make your custom message and pass to enum
+            throw new ValidationException(SignUpErrorType.USERNAME_ALREADY_EXISTS, myMessage, HttpStatus.NOT_FOUND);
         }
 //            throw new ValidationException(SignUpErrorType.INVALID_USERNAME_LENGTH);
 

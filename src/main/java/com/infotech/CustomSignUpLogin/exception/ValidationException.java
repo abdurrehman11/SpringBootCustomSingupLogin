@@ -1,17 +1,19 @@
 package com.infotech.CustomSignUpLogin.exception;
 
+import org.springframework.http.HttpStatus;
+
 public class ValidationException extends BaseException {
 
-    protected ValidationException(Exception ex) {
-        super(ex);
+    public ValidationException(Exception ex, HttpStatus httpStatus) {
+        super(ex, httpStatus);
     }
 
-    public ValidationException(ApiErrorType<? extends Enum<?>> apiErrorType) {
-        super(apiErrorType);
+    public ValidationException(ApiErrorType<? extends Enum<?>> apiErrorType, HttpStatus httpStatus) {
+        super(apiErrorType, httpStatus);
     }
 
-    protected ValidationException(ApiErrorType<? extends Enum<?>> apiErrorType, Exception ex) {
-        super(apiErrorType, ex);
+    public ValidationException(ApiErrorType<? extends Enum<?>> apiErrorType, String message, HttpStatus httpStatus) {
+        super(apiErrorType, message, httpStatus);
     }
 
 }

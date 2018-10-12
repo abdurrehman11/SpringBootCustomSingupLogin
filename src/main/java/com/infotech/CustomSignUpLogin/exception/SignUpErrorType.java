@@ -1,49 +1,32 @@
 package com.infotech.CustomSignUpLogin.exception;
 
+import org.springframework.http.HttpStatus;
+
 public enum SignUpErrorType implements ApiErrorType<SignUpErrorType> {
 
     INVALID_USERNAME_LENGTH(1001, "Username must consists of 3 characters"),
     INVALID_EMAIL_FORMAT(1002, "Email format is not valid"),
     INVALID_PASSWORD_LENGTH(1003, "Password must consists of 8 characters"),
-    SUCCESSFUL_REGISTRATION(1005, "User registered successfully"),
+    USERNAME_ALREADY_EXISTS(1004, "Username already exists"),
+    SUCCESSFUL_REGISTRATION(1005, "User registered successfully");
 
-    // can append custom message from service
-    USERNAME_ALREADY_EXISTS(1004);
-
+    private Integer error_code;
     private String message = "";
-    private Integer code;
 
-    SignUpErrorType(Integer code, String message) {
-        this.code = code;
+    SignUpErrorType(Integer error_code, String message) {
+        this.error_code = error_code;
         this.message = message;
     }
-
-    SignUpErrorType(Integer code) {
-        this.code = code;
-    }
-
-//    SignUpErrorType(int code, String ... values) {
-//        this.code = code;
-//        for (String value: values) {
-//            this.message += value;
-//        }
-//    }
 
     @Override
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String ... values) {
-        for (String value: values) {
-            this.message += value;
-        }
-    }
 
     @Override
     public Integer getErrorCode() {
-        return code;
+        return error_code;
     }
-
 
 }
