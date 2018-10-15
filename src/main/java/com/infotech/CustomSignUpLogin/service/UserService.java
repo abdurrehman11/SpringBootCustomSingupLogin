@@ -31,7 +31,7 @@ public class UserService {
             String id = "2";
             String myMessage = "Username already exists with id: " + id;
             // make your custom message and pass to enum
-            throw new ValidationException(SignUpErrorType.USERNAME_ALREADY_EXISTS, myMessage, HttpStatus.NOT_FOUND);
+            throw new ValidationException(SignUpErrorType.USERNAME_ALREADY_EXISTS, myMessage);
         }
 //            throw new ValidationException(SignUpErrorType.INVALID_USERNAME_LENGTH);
 

@@ -11,23 +11,23 @@ public class ExceptionController {
 
     @ResponseBody
     @ExceptionHandler(value = BaseException.class)
-    public ErrorResponse handleValidationException (BaseException ex, HttpServletRequest req, HttpServletResponse res) {
+    public Response handleValidationException (BaseException ex, HttpServletRequest req, HttpServletResponse res) {
 
-        ErrorResponse errorResponse = new ErrorResponse(ex.getHttpStatus().value(), ex.getErrorMessage(),
-               ex.getErrorCode());
-       res.setStatus(ex.getHttpStatus().value());
-       return errorResponse;
+        Response response = new ErrorResponse(ex.getHttpStatus().value(), ex.getErrorMessage(), ex.getErrorCode());
+        res.setStatus(ex.getHttpStatus().value());
+//        System.out.println(ex.getStackTrace().toString());
+        return response;
     }
 
 
     @ResponseBody
     @ExceptionHandler(value = RuntimeException.class)
-    public ErrorResponse handleGeneralException(HttpServletRequest req, HttpServletResponse res) {
+    public Response handleGeneralException(HttpServletRequest req, HttpServletResponse res) {
 
-        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), GeneralErrorType.ERROR_DESCRIPTION.getErrorMessage(),
+        Response response = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), GeneralErrorType.ERROR_DESCRIPTION.getErrorMessage(),
                 GeneralErrorType.ERROR_DESCRIPTION.getErrorCode());
         res.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return errorResponse;
+        return response;
     }
 
 }
