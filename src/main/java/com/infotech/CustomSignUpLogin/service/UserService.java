@@ -29,9 +29,11 @@ public class UserService {
         if (user.getUsername().length() < 3)
         {
             String id = "2";
-            String myMessage = "Username already exists with id: " + id;
+
+            String msgParams = "ali12 | 6";
+
             // make your custom message and pass to enum
-            throw new ValidationException(SignUpErrorType.USERNAME_ALREADY_EXISTS, myMessage);
+            throw new ValidationException(SignUpErrorType.INVALID_USERNAME_LENGTH, msgParams);
         }
 //            throw new ValidationException(SignUpErrorType.INVALID_USERNAME_LENGTH);
 

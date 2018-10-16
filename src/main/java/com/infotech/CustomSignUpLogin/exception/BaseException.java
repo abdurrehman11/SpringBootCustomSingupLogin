@@ -74,10 +74,17 @@ public abstract class BaseException extends RuntimeException {
         this.errorCode = apiErrorType.getErrorCode();
     }
 
-    protected BaseException (ApiErrorType<? extends Enum<?>> apiErrorType, String message, HttpStatus httpStatus) {
-        super(message);
+//    protected BaseException (ApiErrorType<? extends Enum<?>> apiErrorType, String message, HttpStatus httpStatus) {
+//        super(message);
+//        this.httpStatus = httpStatus;
+//        this.errorMessage = getCustomMessage(apiErrorType, message);
+//        this.errorCode = apiErrorType.getErrorCode();
+//    }
+
+    protected BaseException (ApiErrorType<? extends Enum<?>> apiErrorType, String paramsList, HttpStatus httpStatus) {
+        super(ErrorMessage.getErrorMessage(apiErrorType, paramsList));
         this.httpStatus = httpStatus;
-        this.errorMessage = message;
+        this.errorMessage = ErrorMessage.getErrorMessage(apiErrorType, paramsList);
         this.errorCode = apiErrorType.getErrorCode();
     }
 
@@ -104,4 +111,5 @@ public abstract class BaseException extends RuntimeException {
     public void setErrorCode(Integer errorCode) {
         this.errorCode = errorCode;
     }
+
 }
